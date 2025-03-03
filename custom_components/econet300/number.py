@@ -21,7 +21,7 @@ from .const import (
     ENTITY_UNIT_MAP,
     NUMBER_MAP,
     SERVICE_API,
-    SERVICE_COORDINATOR,
+    SERVICE_COORDINATOR, ENTITY_CATEGORY,
 )
 from .entity import EconetEntity
 
@@ -69,8 +69,8 @@ class EconetNumber(EconetEntity, NumberEntity):
 
     def _set_value_limits(self, value):
         """Set native min and max values for the entity."""
-        self._attr_native_min_value = value.get("min")
-        self._attr_native_max_value = value.get("max")
+        self._attr_native_min_value = value.get("minv")
+        self._attr_native_max_value = value.get("maxv")
         _LOGGER.debug(
             "ecoNETNumber _set_value_limits: min=%s, max=%s",
             self._attr_native_min_value,
@@ -150,11 +150,13 @@ def create_number_entity_description(key: str) -> EconetNumberEntityDescription:
     map_key = NUMBER_MAP.get(str(key), str(key))
     _LOGGER.debug("Creating number entity for key: %s", map_key)
     return EconetNumberEntityDescription(
-        key=key,
+        key=map_key,
+        name=key,
         translation_key=camel_to_snake(map_key),
         icon=ENTITY_ICON.get(map_key),
         device_class=ENTITY_NUMBER_SENSOR_DEVICE_CLASS_MAP.get(map_key),
         native_unit_of_measurement=ENTITY_UNIT_MAP.get(map_key),
+        entity_category=ENTITY_CATEGORY.get(map_key, None),
         min_value=ENTITY_MIN_VALUE.get(map_key),
         max_value=ENTITY_MAX_VALUE.get(map_key),
         native_step=ENTITY_STEP.get(map_key, 1),

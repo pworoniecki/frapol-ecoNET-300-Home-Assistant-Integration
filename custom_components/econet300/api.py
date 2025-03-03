@@ -214,7 +214,7 @@ class Econet300Api:
             return False
 
         data = await self._client.get(
-            f"{self.host}/econet/rmCurrNewParam?newParamKey={param}&newParamValue={value}"
+            f"{self.host}/econet/newParam?newParamName={param}&newParamValue={value}"
         )
         if data is None or "result" not in data:
             return False
@@ -262,7 +262,7 @@ class Econet300Api:
         curr_limits = limits[param]
         _LOGGER.debug("Limits '%s'", limits)
         _LOGGER.debug("Limits for edit param '%s': %s", param, curr_limits)
-        return Limits(curr_limits["min"], curr_limits["max"])
+        return Limits(curr_limits["minv"], curr_limits["maxv"])
 
     async def fetch_reg_params_data(self) -> dict[str, Any]:
         """Fetch data from econet/regParamsData."""

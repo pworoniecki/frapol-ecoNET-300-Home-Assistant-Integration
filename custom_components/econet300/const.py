@@ -43,8 +43,8 @@ API_REG_PARAMS_URI = "regParams"
 API_REG_PARAMS_PARAM_DATA = "curr"
 
 ## Reg params data all in one
-API_REG_PARAMS_DATA_URI = "regParamsData"
-API_REG_PARAMS_DATA_PARAM_DATA = "data"
+API_REG_PARAMS_DATA_URI = "regParams"
+API_REG_PARAMS_DATA_PARAM_DATA = "curr"
 
 # Boiler status keys map
 OPERATION_MODE_NAMES = {
@@ -64,9 +64,25 @@ OPERATION_MODE_NAMES = {
     13: "no_transmission",
 }
 
+FRAPOL_MAIN_MODE_NAMES = {
+    1: STATE_OFF,
+    2: STATE_PAUSED,
+    3: "mode_1",
+    4: "mode_2",
+    5: "mode_3",
+    6: "mode_4"
+}
+
+FRAPOL_TEMP_MODE_NAMES = {
+    1: STATE_OFF,
+    2: "exit",
+    3: "party",
+    4: "quick_ventilation"
+}
+
 ## Editable params limits
-API_EDIT_PARAM_URI = "rmCurrNewParam"
-API_EDITABLE_PARAMS_LIMITS_URI = "rmCurrentDataParamsEdits"
+API_EDIT_PARAM_URI = "newParam"
+API_EDITABLE_PARAMS_LIMITS_URI = "editParams"
 API_EDITABLE_PARAMS_LIMITS_DATA = "data"
 
 ###################################
@@ -102,6 +118,10 @@ SENSOR_MAP_KEY = {
         "Circuit1thermostat",
         "heating_work_state_pump4",
     },
+    "frapol": {
+        "mainMode",
+        "tempMode"
+    },
     "lambda": {
         "lambdaStatus",
         "lambdaSet",
@@ -124,6 +144,8 @@ SENSOR_MAP_KEY = {
         "tempExternalSensor",
         "tempLowerBuffer",
         "tempUpperBuffer",
+        "mainMode",
+        "tempMode",
         "quality",
         "signal",
         "softVer",
@@ -202,6 +224,8 @@ ENTITY_UNIT_MAP = {
 # By default all sensors state_class are MEASUREMENT
 STATE_CLASS_MAP: dict[str, SensorStateClass | None] = {
     "lambdaStatus": None,
+    "mainMode": None,
+    "tempMode": None,
     "mode": None,
     "thermostat": None,
     "statusCWU": None,
@@ -251,6 +275,9 @@ ENTITY_SENSOR_DEVICE_CLASS_MAP: dict[str, SensorDeviceClass | None] = {
     "TempBuforDown": SensorDeviceClass.TEMPERATURE,
     "heatingUpperTemp": SensorDeviceClass.TEMPERATURE,
     "Circuit1thermostat": SensorDeviceClass.TEMPERATURE,
+    # frapol
+    "mainMode": SensorDeviceClass.ENUM,
+    "tempMode": SensorDeviceClass.ENUM,
 }
 
 ENTITY_NUMBER_SENSOR_DEVICE_CLASS_MAP = {
@@ -367,6 +394,8 @@ NO_CWU_TEMP_SET_STATUS_CODE = 128
 
 ENTITY_VALUE_PROCESSOR = {
     "mode": lambda x: OPERATION_MODE_NAMES.get(x, STATE_UNKNOWN),
+    "mainMode": lambda x: FRAPOL_MAIN_MODE_NAMES.get(x, STATE_UNKNOWN),
+    "tempNode": lambda x: FRAPOL_TEMP_MODE_NAMES.get(x, STATE_UNKNOWN),
     "lambdaStatus": (
         lambda x: (
             "stop"

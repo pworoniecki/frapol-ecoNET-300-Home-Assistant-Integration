@@ -20,7 +20,7 @@ from .const import (
     ENTITY_ICON,
     ENTITY_ICON_OFF,
     SERVICE_API,
-    SERVICE_COORDINATOR,
+    SERVICE_COORDINATOR, ENTITY_CATEGORY,
 )
 from .entity import EconetEntity
 
@@ -61,7 +61,10 @@ class EconetBinarySensor(EconetEntity, BinarySensorEntity):
         """Sync state."""
         value = bool(value)
         _LOGGER.debug("EconetBinarySensor _sync_state: %s", value)
-        self._attr_is_on = value
+        if isinstance(value, dict):
+            self._attr_is_on = bool(value.get("value"))
+        else:
+            self._attr_is_on = bool(value)
         _LOGGER.debug(
             "Updated EconetBinarySensor _attr_is_on for %s: %s",
             self.entity_description.key,
@@ -86,6 +89,7 @@ def create_binary_entity_description(key: str) -> EconetBinarySensorEntityDescri
         key=key,
         translation_key=camel_to_snake(key),
         device_class=ENTITY_BINARY_DEVICE_CLASS_MAP.get(key, None),
+        entity_category=ENTITY_CATEGORY.get(key, None),
         icon=ENTITY_ICON.get(key, None),
         icon_off=ENTITY_ICON_OFF.get(key, None),
     )

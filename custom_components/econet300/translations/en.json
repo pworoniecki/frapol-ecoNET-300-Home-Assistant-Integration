@@ -64,6 +64,28 @@
       }
     },
     "sensor": {
+      "main_mode": {
+        "name": "Working mode",
+        "state": {
+          "1": "Off",
+          "2": "Paused",
+          "3": "Mode 1",
+          "4": "Mode 2",
+          "5": "Mode 3",
+          "6": "Mode 4",
+          "unknown": "Unknown"
+        }
+      },
+      "temp_mode": {
+        "name": "Temporary mode",
+        "state": {
+          "1": "Off",
+          "2": "Exit",
+          "3": "Party",
+          "4": "Quick ventilation",
+          "unknown": "Unknown"
+        }
+      },
       "boiler_power": {
         "name": "Boiler output"
       },

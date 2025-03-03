@@ -55,6 +55,28 @@
       }
     },
     "sensor": {
+      "main_mode": {
+        "name": "Główny tryb pracy",
+        "state": {
+          "1": "Wyłączony",
+          "2": "Pauza",
+          "3": "Tryb 1",
+          "4": "Tryb 2",
+          "5": "Tryb 3",
+          "6": "Tryb 4",
+          "unknown": "Nieznany"
+        }
+      },
+      "temp_mode": {
+        "name": "Tryb tymczasowy",
+        "state": {
+          "1": "Wyłączony",
+          "2": "Wyjście",
+          "3": "Party",
+          "4": "Wietrzenie",
+          "unknown": "Nieznany"
+        }
+      },
       "boiler_power": {
         "name": "Moc kotła"
       },

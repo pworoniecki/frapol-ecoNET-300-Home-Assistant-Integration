@@ -1,15 +1,15 @@
 {
-  "domain": "econet300",
-  "name": "ecoNET300",
+  "domain": "econet300Frapol",
+  "name": "ecoNET300Frapol",
   "codeowners": [
-    "@jontofront"
+    "@pworoniecki"
   ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/jontofront/ecoNET-300-Home-Assistant-Integration",
+  "documentation": "https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration",
   "homekit": {},
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/jontofront/ecoNET-300-Home-Assistant-Integration/issues",
+  "issue_tracker": "https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration/issues",
   "requirements": [],
   "ssdp": [],
   "version": "v1.1.0",
