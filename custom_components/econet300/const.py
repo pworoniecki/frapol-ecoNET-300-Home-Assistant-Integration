@@ -175,6 +175,8 @@ BINARY_SENSOR_MAP_KEY = {
 NUMBER_MAP = {
     "1280": "tempCOSet",
     "1281": "tempCWUSet",
+    "REKWS1": "REKWS1",
+    "REKWS4": "REKWS4",
 }
 
 # By default all sensors unit_of_measurement are None
