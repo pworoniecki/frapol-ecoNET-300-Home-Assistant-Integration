@@ -118,7 +118,7 @@ SENSOR_MAP_KEY = {
         "Circuit1thermostat",
         "heating_work_state_pump4",
     },
-    "frapol": {
+    "ecoVENT": {
         "REKWS1",
         "REKWS4"
     },
