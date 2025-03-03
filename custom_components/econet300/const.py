@@ -17,7 +17,7 @@ from homeassistant.const import (
 )
 
 # Constant for the econet Integration integration
-DOMAIN = "econet300"
+DOMAIN = "econet300Frapol"
 
 SERVICE_API = "api"
 SERVICE_COORDINATOR = "coordinator"
