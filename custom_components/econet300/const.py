@@ -73,11 +73,21 @@ FRAPOL_MAIN_MODE_NAMES = {
     6: "mode_4"
 }
 
+FRAPOL_MAIN_MODE_NAMES_TO_VALUES = {v: k for k, v in FRAPOL_MAIN_MODE_NAMES.items()}
+
 FRAPOL_TEMP_MODE_NAMES = {
     1: STATE_OFF,
     2: "exit",
     3: "party",
     4: "quick_ventilation"
+}
+
+FRAPOL_TEMP_MODE_NAMES_TO_VALUES = {v: k for k, v in FRAPOL_TEMP_MODE_NAMES.items()}
+
+
+SELECT_MAP_KEY_TO_OPTIONS_MAP = {
+    "REKWS1": FRAPOL_MAIN_MODE_NAMES_TO_VALUES,
+    "REKWS4": FRAPOL_TEMP_MODE_NAMES_TO_VALUES,
 }
 
 ## Editable params limits
@@ -101,6 +111,17 @@ SENSOR_MIXER_KEY = {
 #######################
 #    REG PARAM MAPS
 #######################
+
+SELECT_MAP_KEY = {
+    "ecoVENT": {
+        "REKWS1",
+        "REKWS4"
+    },
+    "_default": {
+        "REKWS1",
+        "REKWS4",
+    },
+}
 
 SENSOR_MAP_KEY = {
     "ecoMAX360i": {
