@@ -119,8 +119,8 @@ SENSOR_MAP_KEY = {
         "heating_work_state_pump4",
     },
     "frapol": {
-        "mainMode",
-        "tempMode"
+        "REKWS1",
+        "REKWS4"
     },
     "lambda": {
         "lambdaStatus",
@@ -144,8 +144,8 @@ SENSOR_MAP_KEY = {
         "tempExternalSensor",
         "tempLowerBuffer",
         "tempUpperBuffer",
-        "mainMode",
-        "tempMode",
+        "REKWS1",
+        "REKWS4",
         "quality",
         "signal",
         "softVer",
@@ -224,8 +224,8 @@ ENTITY_UNIT_MAP = {
 # By default all sensors state_class are MEASUREMENT
 STATE_CLASS_MAP: dict[str, SensorStateClass | None] = {
     "lambdaStatus": None,
-    "mainMode": None,
-    "tempMode": None,
+    "REKWS1": None,
+    "REKWS4": None,
     "mode": None,
     "thermostat": None,
     "statusCWU": None,
@@ -276,8 +276,8 @@ ENTITY_SENSOR_DEVICE_CLASS_MAP: dict[str, SensorDeviceClass | None] = {
     "heatingUpperTemp": SensorDeviceClass.TEMPERATURE,
     "Circuit1thermostat": SensorDeviceClass.TEMPERATURE,
     # frapol
-    "mainMode": SensorDeviceClass.ENUM,
-    "tempMode": SensorDeviceClass.ENUM,
+    "REKWS1": SensorDeviceClass.ENUM,
+    "REKWS4": SensorDeviceClass.ENUM,
 }
 
 ENTITY_NUMBER_SENSOR_DEVICE_CLASS_MAP = {
@@ -394,8 +394,8 @@ NO_CWU_TEMP_SET_STATUS_CODE = 128
 
 ENTITY_VALUE_PROCESSOR = {
     "mode": lambda x: OPERATION_MODE_NAMES.get(x, STATE_UNKNOWN),
-    "mainMode": lambda x: FRAPOL_MAIN_MODE_NAMES.get(x, STATE_UNKNOWN),
-    "tempNode": lambda x: FRAPOL_TEMP_MODE_NAMES.get(x, STATE_UNKNOWN),
+    "REKWS1": lambda x: FRAPOL_MAIN_MODE_NAMES.get(x, STATE_UNKNOWN),
+    "REKWS4": lambda x: FRAPOL_TEMP_MODE_NAMES.get(x, STATE_UNKNOWN),
     "lambdaStatus": (
         lambda x: (
             "stop"

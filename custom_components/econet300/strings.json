@@ -64,7 +64,7 @@
       }
     },
     "sensor": {
-      "main_mode": {
+      "REKWS1": {
         "name": "Working mode",
         "state": {
           "1": "Off",
@@ -76,7 +76,7 @@
           "unknown": "Unknown"
         }
       },
-      "temp_mode": {
+      "REKWS4": {
         "name": "Temporary mode",
         "state": {
           "1": "Off",
