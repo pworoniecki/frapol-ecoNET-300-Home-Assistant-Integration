@@ -230,7 +230,7 @@ class Econet300Api:
             try:
                 # Attempt to fetch the API data
                 limits = await self._fetch_api_data_by_key(
-                    API_EDITABLE_PARAMS_LIMITS_URI, API_EDITABLE_PARAMS_LIMITS_DATA
+                    API_EDITABLE_PARAMS_LIMITS_URI, API_EDITABLE_PARAMS_LIMITS_DATA, lambda value: value.name
                 )
                 # Cache the fetched data
                 self._cache.set(API_EDITABLE_PARAMS_LIMITS_DATA, limits)
@@ -321,7 +321,8 @@ class Econet300Api:
         _LOGGER.debug("Fetched sysParams data: %s", sysParams)
         return sysParams
 
-    async def _fetch_api_data_by_key(self, endpoint: str, data_key: str | None = None):
+    async def _fetch_api_data_by_key(self, endpoint: str, data_key: str | None = None,
+                                     key_as_transformed_value=None):
         """Fetch a key from the json-encoded data returned by the API for a given registry If key is None, then return whole data."""
         try:
             data = await self._client.get(f"{self.host}/econet/{endpoint}")
@@ -341,7 +342,10 @@ class Econet300Api:
                 )
                 return None
 
-            return data[data_key]
+            if not key_as_transformed_value:
+                return data[data_key]
+            else:
+                return {key_as_transformed_value(v): v for k, v in data[data_key].items()}
         except aiohttp.ClientError as e:
             _LOGGER.error(
                 "lient error occurred while fetching data from endpoint: %s, error: %s",

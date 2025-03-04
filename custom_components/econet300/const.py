@@ -194,6 +194,8 @@ BINARY_SENSOR_MAP_KEY = {
 }
 
 NUMBER_MAP = {
+    "17": "REKWS1",
+    "20": "REKWS4",
     "1280": "tempCOSet",
     "1281": "tempCWUSet",
     "REKWS1": "REKWS1",
