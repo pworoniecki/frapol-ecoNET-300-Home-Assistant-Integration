@@ -52,7 +52,10 @@ class EconetNumber(EconetEntity, NumberEntity):
     def _sync_state(self, value):
         """Sync the state of the ecoNET number entity."""
         _LOGGER.debug("ecoNETNumber _sync_state: %s", value)
-        self._attr_native_value = value.get("value")
+        if value is dict:
+            self._attr_native_value = value.get("value")
+        else:
+            self._attr_native_value = value
         map_key = NUMBER_MAP.get(self.entity_description.key)
 
         if map_key:
