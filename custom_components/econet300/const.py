@@ -139,10 +139,6 @@ SENSOR_MAP_KEY = {
         "Circuit1thermostat",
         "heating_work_state_pump4",
     },
-    "ecoVENT": {
-        "REKWS1",
-        "REKWS4"
-    },
     "lambda": {
         "lambdaStatus",
         "lambdaSet",
@@ -165,8 +161,6 @@ SENSOR_MAP_KEY = {
         "tempExternalSensor",
         "tempLowerBuffer",
         "tempUpperBuffer",
-        "REKWS1",
-        "REKWS4",
         "quality",
         "signal",
         "softVer",
@@ -245,8 +239,6 @@ ENTITY_UNIT_MAP = {
 # By default all sensors state_class are MEASUREMENT
 STATE_CLASS_MAP: dict[str, SensorStateClass | None] = {
     "lambdaStatus": None,
-    "REKWS1": None,
-    "REKWS4": None,
     "mode": None,
     "thermostat": None,
     "statusCWU": None,
@@ -296,9 +288,6 @@ ENTITY_SENSOR_DEVICE_CLASS_MAP: dict[str, SensorDeviceClass | None] = {
     "TempBuforDown": SensorDeviceClass.TEMPERATURE,
     "heatingUpperTemp": SensorDeviceClass.TEMPERATURE,
     "Circuit1thermostat": SensorDeviceClass.TEMPERATURE,
-    # frapol
-    "REKWS1": SensorDeviceClass.ENUM,
-    "REKWS4": SensorDeviceClass.ENUM,
 }
 
 ENTITY_NUMBER_SENSOR_DEVICE_CLASS_MAP = {

@@ -230,7 +230,7 @@ class Econet300Api:
             try:
                 # Attempt to fetch the API data
                 limits = await self._fetch_api_data_by_key(
-                    API_EDITABLE_PARAMS_LIMITS_URI, API_EDITABLE_PARAMS_LIMITS_DATA, lambda value: value.name
+                    API_EDITABLE_PARAMS_LIMITS_URI, API_EDITABLE_PARAMS_LIMITS_DATA
                 )
                 # Cache the fetched data
                 self._cache.set(API_EDITABLE_PARAMS_LIMITS_DATA, limits)
@@ -262,7 +262,7 @@ class Econet300Api:
         curr_limits = limits[param]
         _LOGGER.debug("Limits '%s'", limits)
         _LOGGER.debug("Limits for edit param '%s': %s", param, curr_limits)
-        return Limits(curr_limits["minv"], curr_limits["maxv"])
+        return Limits(curr_limits["min"], curr_limits["max"])
 
     async def fetch_reg_params_data(self) -> dict[str, Any]:
         """Fetch data from econet/regParamsData."""
