@@ -52,10 +52,7 @@ class EconetNumber(EconetEntity, NumberEntity):
     def _sync_state(self, value):
         """Sync the state of the ecoNET number entity."""
         _LOGGER.debug("ecoNETNumber _sync_state: %s", value)
-        if value is dict:
-            self._attr_native_value = value.get("value")
-        else:
-            self._attr_native_value = value
+        self._attr_native_value = value.get("value")
         map_key = NUMBER_MAP.get(self.entity_description.key)
 
         if map_key:
@@ -72,8 +69,8 @@ class EconetNumber(EconetEntity, NumberEntity):
 
     def _set_value_limits(self, value):
         """Set native min and max values for the entity."""
-        self._attr_native_min_value = value.get("minv")
-        self._attr_native_max_value = value.get("maxv")
+        self._attr_native_min_value = value.get("min")
+        self._attr_native_max_value = value.get("max")
         _LOGGER.debug(
             "ecoNETNumber _set_value_limits: min=%s, max=%s",
             self._attr_native_min_value,
