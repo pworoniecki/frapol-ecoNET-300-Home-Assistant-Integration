@@ -39,21 +39,17 @@ class MainModeSelect(SelectEntity):
         self._api = api
         self._attr_options = list(MAIN_MODES.values())
         self._attr_name = "Main Working Mode"
-        self._attr_unique_id = "recuperator_main_mode"
-        self._state = None
+        self._attr_unique_id = "frapol-recuperator_main_mode"
 
-    def current_option(self) -> str | None:
-        return self._state
-
-    async def update(self):
+    async def async_update(self):
         data = await self._api.fetch_reg_params_data()
-        self._state = MAIN_MODES.get(data.get("REKWS1"), "Unknown")
+        self._attr_current_option = MAIN_MODES.get(data.get("REKWS1"), "Unknown")
 
     async def select_option(self, option: str):
         for key, value in MAIN_MODES.items():
             if value == option and await self._api.set_param("REKWS1", key):
-                self._state = value
-                self.schedule_update_ha_state()
+                self._attr_current_option = option
+                self.async_write_ha_state()
 
 
 class TempModeSelect(SelectEntity):
@@ -61,20 +57,17 @@ class TempModeSelect(SelectEntity):
         self._api = api
         self._attr_options = list(TEMP_MODES.values())
         self._attr_name = "Temporary Working Mode"
-        self._attr_unique_id = "recuperator_temp_mode"
-        self._state = None
+        self._attr_unique_id = "frapol-recuperator_temp_mode"
 
-    def current_option(self) -> str | None:
-        return self._state
-
-    async def update(self):
+    async def async_update(self):
         data = await self._api.fetch_reg_params_data()
-        self._state = MAIN_MODES.get(data.get("REKWS4"), "Unknown")
+        self._attr_current_option = MAIN_MODES.get(data.get("REKWS4"), "Unknown")
 
     async def select_option(self, option: str):
         for key, value in MAIN_MODES.items():
             if value == option and await self._api.set_param("REKWS4", key):
-                self._state = value
+                self._attr_current_option = option
+                self.async_write_ha_state()
 
 
 async def async_setup_entry(
