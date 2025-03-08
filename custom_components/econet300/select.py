@@ -42,6 +42,9 @@ class MainModeSelect(SelectEntity):
         self._attr_unique_id = "recuperator_main_mode"
         self._state = None
 
+    def current_option(self) -> str | None:
+        return self._state
+
     async def update(self):
         data = await self._api.fetch_reg_params_data()
         self._state = MAIN_MODES.get(data.get("REKWS1"), "Unknown")
@@ -50,6 +53,7 @@ class MainModeSelect(SelectEntity):
         for key, value in MAIN_MODES.items():
             if value == option and await self._api.set_param("REKWS1", key):
                 self._state = value
+                self.schedule_update_ha_state()
 
 
 class TempModeSelect(SelectEntity):
