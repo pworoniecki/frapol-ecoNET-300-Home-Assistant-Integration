@@ -51,6 +51,7 @@ class MainModeSelect(SelectEntity):
                 self._attr_current_option = option
                 self.async_write_ha_state()
 
+    @property
     def current_option(self) -> str | None:
         return self._attr_current_option
 
@@ -72,6 +73,7 @@ class TempModeSelect(SelectEntity):
                 self._attr_current_option = option
                 self.async_write_ha_state()
 
+    @property
     def current_option(self) -> str | None:
         return self._attr_current_option
 
