@@ -51,6 +51,9 @@ class MainModeSelect(SelectEntity):
                 self._attr_current_option = option
                 self.async_write_ha_state()
 
+    def current_option(self) -> str | None:
+        return self._attr_current_option
+
 
 class TempModeSelect(SelectEntity):
     def __init__(self, api: Econet300Api):
@@ -68,6 +71,9 @@ class TempModeSelect(SelectEntity):
             if value == option and await self._api.set_param("REKWS4", key):
                 self._attr_current_option = option
                 self.async_write_ha_state()
+
+    def current_option(self) -> str | None:
+        return self._attr_current_option
 
 
 async def async_setup_entry(
