@@ -64,6 +64,9 @@ class TempModeSelect(SelectEntity):
         self._attr_unique_id = "recuperator_temp_mode"
         self._state = None
 
+    def current_option(self) -> str | None:
+        return self._state
+
     async def update(self):
         data = await self._api.fetch_reg_params_data()
         self._state = MAIN_MODES.get(data.get("REKWS4"), "Unknown")
