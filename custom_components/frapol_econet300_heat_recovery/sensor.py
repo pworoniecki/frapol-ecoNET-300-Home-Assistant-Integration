@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 
-from .const import API_REG_PARAM_CURRENT_FAN_SPEED
+from .const import API_REG_PARAM_CURRENT_FAN_SPEED, LOGGER
 
 from .entity import FrapolEconet300Entity
 
@@ -56,4 +56,4 @@ class FrapolEconet300Sensor(FrapolEconet300Entity, SensorEntity):
     @property
     def native_value(self) -> str | None:
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("regParams").get(API_REG_PARAM_CURRENT_FAN_SPEED)
+        return self.coordinator.data.get("regParams").get("curr").get(API_REG_PARAM_CURRENT_FAN_SPEED)

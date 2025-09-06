@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import socket
+import traceback
 from typing import Any
 
 import aiohttp
@@ -48,8 +49,8 @@ class FrapolEconet300ApiClient:
     ) -> None:
         LOGGER.debug(f"Initializing API with host: {host} and username: {username}")
 
-        host_protocol_included = all(
-            protocol not in host for protocol in ["http://", "https://"]
+        host_protocol_included = any(
+            protocol in host for protocol in ["http://", "https://"]
         )
         if not host_protocol_included:
             LOGGER.warning(f"Missing host protocol, assuming http")
@@ -63,17 +64,17 @@ class FrapolEconet300ApiClient:
 
     async def refresh_state(self):
         LOGGER.info("Refreshing state")
-        self._reg_params = self._get_reg_params()
-        self._sys_params = self._get_sys_params()
+        self._reg_params = await self._get_reg_params()
+        self._sys_params = await self._get_sys_params()
         LOGGER.info("State refreshed")
 
     async def get_all_data(self):
         if self._reg_params is None:
             LOGGER.info("Reg params not loaded yet, state will be refreshed")
-            self.refresh_state()
+            await self.refresh_state()
         elif self._sys_params is None:
             LOGGER.info("Sys params not loaded yet, state will be refreshed")
-            self.refresh_state()
+            await self.refresh_state()
 
         return {
             "regParams": self._reg_params,
@@ -83,14 +84,14 @@ class FrapolEconet300ApiClient:
     async def get_current_reg_param(self, param_name: str):
         if self._reg_params is None:
             LOGGER.info("Reg params not loaded yet, state will be refreshed")
-            self.refresh_state()
-        return self._reg_params["curr"][param_name]
+            await self.refresh_state()
+        return self._reg_params.get("curr")(param_name)
 
     async def get_sys_param(self, param_name: str):
         if self._sys_params is None:
             LOGGER.info("Sys params not loaded yet, state will be refreshed")
-            self.refresh_state()
-        return self._sys_params[param_name]
+            await self.refresh_state()
+        return self._sys_params.get(param_name)
 
     async def _get_reg_params(self) -> dict[str, Any] | None:
         LOGGER.info("Retrieving regParams")
@@ -130,10 +131,11 @@ class FrapolEconet300ApiClient:
         headers: dict | None = None,
     ) -> Any:
         url = self._host + relative_url
+        LOGGER.info("Sending %s request to URL: %s", method, url)
         """Get information from the API."""
         try:
             async with async_timeout.timeout(10):
-                response = await self._session.requeauthst(
+                response = await self._session.request(
                     method=method,
                     url=url,
                     headers=headers,
@@ -149,11 +151,13 @@ class FrapolEconet300ApiClient:
                 msg,
             ) from exception
         except (aiohttp.ClientError, socket.gaierror) as exception:
+            print(traceback.format_exc())
             msg = f"Error fetching information - {exception}"
             raise FrapolEconet300ApiClientCommunicationError(
                 msg,
             ) from exception
         except Exception as exception:  # pylint: disable=broad-except
+            print(traceback.format_exc())
             msg = f"Something really wrong happened! - {exception}"
             raise FrapolEconet300ApiClientError(
                 msg,
