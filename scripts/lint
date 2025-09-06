@@ -4,7 +4,5 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-pre-commit install-hooks --config .github/pre-commit-config.yaml;
-pre-commit run --hook-stage manual --all-files --config .github/pre-commit-config.yaml;
-
-vulture . --min-confidence 75 --ignore-names policy
+ruff format .
+ruff check . --fix

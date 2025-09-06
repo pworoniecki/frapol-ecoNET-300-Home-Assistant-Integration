@@ -1,29 +1,80 @@
-# artifacts
-__pycache__
-.pytest*
-*.egg-info
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
 */build/*
+develop-eggs/
 */dist/*
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
 
-# misc
+# Unit test / coverage reports
+htmlcov/
+.tox/
 .coverage
-.python-version
-.venv
-.vscode
+.coverage.*
+.cache
+nosetests.xml
 coverage.xml
-htmlcov
-outputdata
-settings.json
-venv
+*.cover
+.hypothesis/
+.pytest*
 
+# Sphinx documentation
+docs/_build/
 
-# Frontend are downloaded on release
-custom_components/hacs/hacs_frontend
+# PyBuilder
+target/
 
-# Translation files
-custom_components/hacs/translations
-!custom_components/hacs/translations/en.json
+# pyenv
+.python-version
+
+# Environments
+pythonenv*
+.env
+.venv
+.coverage
+.idea
+.vscode
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+coverage.xml
+.ruff_cache
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
 
 # Home Assistant configuration
-config
+config/*
+!config/bootstrap.sh
+!config/configuration.yaml
+
+
+
+/custom_components/__init__.py
+/test*.py
+secrets.yaml
