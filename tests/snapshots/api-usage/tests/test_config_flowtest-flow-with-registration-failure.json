@@ -1,5 +1,0 @@
-{
-    "tests/test_config_flow.py::test_flow_with_registration_failure": {
-        "https://github.com/login/device/code": 1
-    }
-}
