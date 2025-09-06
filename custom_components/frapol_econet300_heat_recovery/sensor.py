@@ -1,4 +1,4 @@
-"""Sensor platform for integration_blueprint."""
+"""Sensor platform for frapol_econet300_heat_recovery."""
 
 from __future__ import annotations
 
@@ -6,32 +6,34 @@ from typing import TYPE_CHECKING
 
 from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 
-from .entity import IntegrationBlueprintEntity
+from .const import API_REG_PARAM_CURRENT_FAN_SPEED
+
+from .entity import FrapolEconet300Entity
 
 if TYPE_CHECKING:
     from homeassistant.core import HomeAssistant
     from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-    from .coordinator import BlueprintDataUpdateCoordinator
-    from .data import IntegrationBlueprintConfigEntry
+    from .coordinator import FrapolEconet300DataUpdateCoordinator
+    from .data import FrapolEconet300ConfigEntry
 
 ENTITY_DESCRIPTIONS = (
     SensorEntityDescription(
-        key="integration_blueprint",
-        name="Integration Sensor",
-        icon="mdi:format-quote-close",
+        key="frapol_econet300_heat_current_fan_speed",
+        name="Frapol ecoNET300 Heat Recovery Current Fan Speed",
+        icon="mdi:fan",
     ),
 )
 
 
 async def async_setup_entry(
     hass: HomeAssistant,  # noqa: ARG001 Unused function argument: `hass`
-    entry: IntegrationBlueprintConfigEntry,
+    entry: FrapolEconet300ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up the sensor platform."""
     async_add_entities(
-        IntegrationBlueprintSensor(
+        FrapolEconet300Sensor(
             coordinator=entry.runtime_data.coordinator,
             entity_description=entity_description,
         )
@@ -39,12 +41,12 @@ async def async_setup_entry(
     )
 
 
-class IntegrationBlueprintSensor(IntegrationBlueprintEntity, SensorEntity):
-    """integration_blueprint Sensor class."""
+class FrapolEconet300Sensor(FrapolEconet300Entity, SensorEntity):
+    """frapol_econet300_heat_recovery Sensor class."""
 
     def __init__(
         self,
-        coordinator: BlueprintDataUpdateCoordinator,
+        coordinator: FrapolEconet300DataUpdateCoordinator,
         entity_description: SensorEntityDescription,
     ) -> None:
         """Initialize the sensor class."""
@@ -54,4 +56,4 @@ class IntegrationBlueprintSensor(IntegrationBlueprintEntity, SensorEntity):
     @property
     def native_value(self) -> str | None:
         """Return the native value of the sensor."""
-        return self.coordinator.data.get("body")
+        return self.coordinator.data.get("regParams").get(API_REG_PARAM_CURRENT_FAN_SPEED)

@@ -20,7 +20,7 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from custom_components.integration_blueprint import IntegrationBlueprintApiClient
+from custom_components.frapol_econet300_heat_recovery import IntegrationBlueprintApiClient
 
 pytest_plugins = "pytest_homeassistant_custom_component"  # pylint: disable=invalid-name
 

@@ -1,0 +1,15 @@
+{
+    "domain": "frapol_econet300_heat_recovery",
+    "name": "Frapol ecoNET300 Heat Recovery",
+    "codeowners": [
+        "@pworoniecki"
+    ],
+    "config_flow": true,
+    "documentation": "https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration",
+    "iot_class": "local_polling",
+    "issue_tracker": "https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration/issues",
+    "requirements": [
+        "pip>=21.3.1"
+    ],
+    "version": "0.0.1"
+}

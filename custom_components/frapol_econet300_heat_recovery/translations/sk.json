@@ -2,7 +2,7 @@
     "config": {
         "step": {
             "user": {
-                "description": "Ak potrebujete pomoc s konfiguráciou, pozrite sa sem: https://github.com/ludeeus/integration_blueprint",
+                "description": "Ak potrebujete pomoc s konfiguráciou, pozrite sa sem: https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration",
                 "data": {
                     "username": "Užívateľské meno",
                     "password": "Heslo"

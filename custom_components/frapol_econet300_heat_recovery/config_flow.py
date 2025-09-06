@@ -4,18 +4,18 @@ from __future__ import annotations
 
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.const import CONF_HOST, CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 from slugify import slugify
 
 from .api import (
-    IntegrationBlueprintApiClient,
-    IntegrationBlueprintApiClientAuthenticationError,
-    IntegrationBlueprintApiClientCommunicationError,
-    IntegrationBlueprintApiClientError,
+    FrapolEconet300ApiClient,
+    FrapolEconet300ApiClientAuthenticationError,
+    FrapolEconet300ApiClientCommunicationError,
+    FrapolEconet300ApiClientError,
 )
-from .const import DOMAIN, LOGGER
+from .const import CONFIG_ENTRY_DESCRIPTION, CONFIG_ENTRY_TITLE, DOMAIN, LOGGER
 
 
 class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
@@ -31,29 +31,28 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
         _errors = {}
         if user_input is not None:
             try:
-                await self._test_credentials(
+                uid = await self._get_device_uid(
+                    host=user_input[CONF_HOST],
                     username=user_input[CONF_USERNAME],
                     password=user_input[CONF_PASSWORD],
                 )
-            except IntegrationBlueprintApiClientAuthenticationError as exception:
+            except FrapolEconet300ApiClientAuthenticationError as exception:
                 LOGGER.warning(exception)
                 _errors["base"] = "auth"
-            except IntegrationBlueprintApiClientCommunicationError as exception:
+            except FrapolEconet300ApiClientCommunicationError as exception:
                 LOGGER.error(exception)
                 _errors["base"] = "connection"
-            except IntegrationBlueprintApiClientError as exception:
+            except FrapolEconet300ApiClientError as exception:
                 LOGGER.exception(exception)
                 _errors["base"] = "unknown"
             else:
-                await self.async_set_unique_id(
-                    ## Do NOT use this in production code
-                    ## The unique_id should never be something that can change
-                    ## https://developers.home-assistant.io/docs/config_entries_config_flow_handler#unique-ids
-                    unique_id=slugify(user_input[CONF_USERNAME])
-                )
+                ## The unique_id should never be something that can change
+                ## https://developers.home-assistant.io/docs/config_entries_config_flow_handler#unique-ids
+                await self.async_set_unique_id(uid)
                 self._abort_if_unique_id_configured()
                 return self.async_create_entry(
-                    title=user_input[CONF_USERNAME],
+                    title=CONFIG_ENTRY_TITLE,
+                    description=CONFIG_ENTRY_DESCRIPTION,
                     data=user_input,
                 )
 
@@ -61,6 +60,14 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=vol.Schema(
                 {
+                    vol.Required(
+                        CONF_HOST,
+                        default=(user_input or {}).get(CONF_HOST, vol.UNDEFINED),
+                    ): selector.TextSelector(
+                        selector.TextSelectorConfig(
+                            type=selector.TextSelectorType.TEXT,
+                        ),
+                    ),
                     vol.Required(
                         CONF_USERNAME,
                         default=(user_input or {}).get(CONF_USERNAME, vol.UNDEFINED),
@@ -79,11 +86,12 @@ class BlueprintFlowHandler(config_entries.ConfigFlow, domain=DOMAIN):
             errors=_errors,
         )
 
-    async def _test_credentials(self, username: str, password: str) -> None:
-        """Validate credentials."""
-        client = IntegrationBlueprintApiClient(
+    async def _get_device_uid(self, host: str, username: str, password: str) -> None:
+        client = FrapolEconet300ApiClient(
+            host=host,
             username=username,
             password=password,
             session=async_create_clientsession(self.hass),
         )
-        await client.async_get_data()
+        await client.refresh_state()
+        await client.get_sys_param("uid")
