@@ -15,7 +15,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.loader import async_get_loaded_integration
 
 from .api import FrapolEconet300ApiClient
-from .const import DOMAIN, LOGGER
+from .const import DOMAIN, LOGGER, NAME
 from .coordinator import FrapolEconet300DataUpdateCoordinator
 from .data import FrapolEconet300Data
 
@@ -28,6 +28,7 @@ PLATFORMS: list[Platform] = [
     Platform.SENSOR,
     Platform.BINARY_SENSOR,
     Platform.SWITCH,
+    Platform.SELECT
 ]
 
 

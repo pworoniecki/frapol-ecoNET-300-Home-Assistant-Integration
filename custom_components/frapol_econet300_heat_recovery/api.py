@@ -78,7 +78,7 @@ class FrapolEconet300ApiClient:
 
         return {
             "regParams": self._reg_params,
-            "sysParams:": self._sys_params
+            "sysParams": self._sys_params
         }
 
     async def get_current_reg_param(self, param_name: str):
@@ -113,7 +113,7 @@ class FrapolEconet300ApiClient:
         LOGGER.debug("Retrieved sysParams: %s", sysParams)
         return sysParams
 
-    async def _set_param(self, param_name: str, param_value: str):
+    async def set_param(self, param_name: str, param_value: str):
         LOGGER.info("Updating param: %s to value: %s", param_name, param_value)
         response = await self._api_wrapper(
             method="get",
