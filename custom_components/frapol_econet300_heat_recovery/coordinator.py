@@ -25,6 +25,7 @@ class FrapolEconet300DataUpdateCoordinator(DataUpdateCoordinator):
     async def _async_update_data(self) -> Any:
         """Update data via library."""
         try:
+            await self.config_entry.runtime_data.client.refresh_state()
             return await self.config_entry.runtime_data.client.get_all_data()
         except FrapolEconet300ApiClientAuthenticationError as exception:
             raise ConfigEntryAuthFailed(exception) from exception

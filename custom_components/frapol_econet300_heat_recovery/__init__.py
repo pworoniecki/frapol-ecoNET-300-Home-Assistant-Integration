@@ -26,8 +26,6 @@ if TYPE_CHECKING:
 
 PLATFORMS: list[Platform] = [
     Platform.SENSOR,
-    Platform.BINARY_SENSOR,
-    Platform.SWITCH,
     Platform.SELECT
 ]
 
@@ -44,7 +42,7 @@ async def async_setup_entry(
         hass=hass,
         logger=LOGGER,
         name=DOMAIN,
-        update_interval=timedelta(seconds=30),
+        update_interval=timedelta(seconds=5),
     )
     entry.runtime_data = FrapolEconet300Data(
         client=FrapolEconet300ApiClient(

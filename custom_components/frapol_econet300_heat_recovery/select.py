@@ -72,7 +72,7 @@ class FrapolEconet300Select(FrapolEconet300Entity, SelectEntity):
         """Initialize the select class."""
         super().__init__(coordinator)
         self._select_data = select_data
-        self._name_to_value_mapping: dict[str, int] = dict((v,k) for k,v in self._select_data.value_to_name_mapping.items())
+        self._name_to_value_mapping: dict[str, int] = dict((v, k) for k, v in self._select_data.value_to_name_mapping.items())
         self._attr_has_entity_name = True
         self._attr_name = select_data.name
         self._attr_options = list(self._name_to_value_mapping.keys())
@@ -80,17 +80,16 @@ class FrapolEconet300Select(FrapolEconet300Entity, SelectEntity):
         self._attr_current_option = self._select_data.value_to_name_mapping.get(current_value, "Unknown")
 
     async def async_select_option(self, option: str) -> None:
+        self._attr_current_option = option
+        self.async_write_ha_state()
+
         value = self._name_to_value_mapping[option]
         await self.coordinator.config_entry.runtime_data.client.set_param(self._select_data.api_param_name, str(value))
 
         await self.coordinator.config_entry.runtime_data.client.refresh_state()
         await self.async_update()
-        # self._attr_current_option = value
-        # await self.async_write_ha_state()
-        # await self.coordinator.async_request_refresh()
 
     async def async_update(self):
-        LOGGER.info("Async update triggered!")
         value = self._select_data.value_extractor(self.coordinator.data)
         self._attr_current_option = self._select_data.value_to_name_mapping.get(value, "Unknown")
 
