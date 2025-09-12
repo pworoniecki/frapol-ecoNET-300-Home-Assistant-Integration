@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Callable
 
 from homeassistant.components.select import SelectEntity
+from homeassistant.core import callback
 
 from .const import API_REG_PARAM_CURRENT_MAIN_MODE, API_REG_PARAM_CURRENT_MAIN_MODE_MAPPING_VALUE_TO_NAME, API_REG_PARAM_CURRENT_TEMP_MODE_MAPPING_VALUE_TO_NAME, API_REG_PARAM_CURRENT_TEMPORARY_MODE, LOGGER
 
@@ -82,17 +83,16 @@ class FrapolEconet300Select(FrapolEconet300Entity, SelectEntity):
 
     async def async_select_option(self, option: str) -> None:
         self._attr_current_option = option
-        self.async_write_ha_state()
-
         value = self._name_to_value_mapping[option]
         await self.coordinator.config_entry.runtime_data.client.set_param(self._select_data.api_param_name, str(value))
+        await self.coordinator.async_request_refresh()
 
-        await self.coordinator.config_entry.runtime_data.client.refresh_state()
-        await self.async_update()
-
-    async def async_update(self):
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Handle updated data from the coordinator."""
         value = self._select_data.value_extractor(self.coordinator.data)
         self._attr_current_option = self._select_data.value_to_name_mapping.get(value, "Unknown")
+        self.async_write_ha_state()
 
     @property
     def unique_id(self) -> str:
