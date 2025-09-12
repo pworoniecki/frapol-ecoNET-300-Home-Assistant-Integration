@@ -1,0 +1,93 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "title": "Rekuperator Frapol ecoNET300",
+                "description": "Zajrzyj tutaj jeśli potrzebujesz pomocy: https://github.com/pworoniecki/frapol-ecoNET-300-Home-Assistant-Integration",
+                "data": {
+                    "host": "Host (adres serwera)",
+                    "username": "Nazwa użytkownika",
+                    "password": "hasło"
+                }
+            }
+        },
+        "error": {
+            "auth": "Nieprawidłowa nazwa użytkownika lub hasło.",
+            "connection": "Nie można połączyć się z serwerem.",
+            "unknown": "Wystąpił nieznany błąd."
+        },
+        "abort": {
+            "already_configured": "To urządzenie jest już skonfigurowane."
+        }
+    },
+    "options": {
+        "step": {
+            "user": {
+                "data": {
+                    "sensor": "Sensor",
+                    "select": "Pole wyboru"
+                }
+            }
+        }
+    },
+    "entity": {
+        "sensor": {
+            "supply_fan_speed": {
+                "name": "Wentylator nawiewu"
+            },
+            "extract_fan_speed": {
+                "name": "Wentylator wywiewu"
+            },
+            "leading_temperature": {
+                "name": "Temperatura wiodąca"
+            },
+            "set_temperature": {
+                "name": "Temperatura zadana"
+            },
+            "supply_temperature": {
+                "name": "Temperatura nawiewu"
+            },
+            "intake_temperature": {
+                "name": "Temperatura czerpni"
+            },
+            "extract_temperature": {
+                "name": "Temperatura wyciągu"
+            },
+            "exhaust_temperature": {
+                "name": "Temperatura wyrzutni"
+            }
+        },
+        "select": {
+            "main_mode": {
+                "name": "Tryb główny",
+                "state": {
+                    "0": "Wyłączony",
+                    "3": "Tryb 1",
+                    "4": "Tryb 2",
+                    "5": "Tryb 3",
+                    "6": "Pauza",
+                    "7": "Tryb 4",
+                    "Off": "Wyłączony",
+                    "Mode 1": "Tryb 1",
+                    "Mode 2": "Tryb 2",
+                    "Mode 3": "Tryb 3",
+                    "Pause": "Pauza",
+                    "Mode 4": "Tryb 4"
+                }
+            },
+            "temp_mode": {
+                "name": "Tryb tymczasowy",
+                "state": {
+                    "0": "Wyłączony",
+                    "1": "Wyjście",
+                    "2": "Party",
+                    "4": "Wentylacja",
+                    "Off": "Wyłączony",
+                    "Exit": "Wyjście",
+                    "Party": "Party",
+                    "Ventilation": "Wentylacja"
+                }
+            }
+        }
+    }
+}

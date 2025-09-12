@@ -78,6 +78,7 @@ class FrapolEconet300Select(FrapolEconet300Entity, SelectEntity):
         self._attr_options = list(self._name_to_value_mapping.keys())
         current_value = self._select_data.value_extractor(self.coordinator.data)
         self._attr_current_option = self._select_data.value_to_name_mapping.get(current_value, "Unknown")
+        self._attr_translation_key = self._select_data.id_suffix
 
     async def async_select_option(self, option: str) -> None:
         self._attr_current_option = option

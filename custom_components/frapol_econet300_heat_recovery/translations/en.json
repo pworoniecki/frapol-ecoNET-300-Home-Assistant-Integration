@@ -17,5 +17,65 @@
         "abort": {
             "already_configured": "This entry is already configured."
         }
+    },
+    "entity": {
+        "sensor": {
+            "supply_fan_speed": {
+                "name": "Supply fan speed"
+            },
+            "extract_fan_speed": {
+                "name": "Extract fan speed"
+            },
+            "leading_temperature": {
+                "name": "Leading temperature"
+            },
+            "set_temperature": {
+                "name": "Set temperature"
+            },
+            "supply_temperature": {
+                "name": "Supply temperature"
+            },
+            "intake_temperature": {
+                "name": "Intake temperature"
+            },
+            "extract_temperature": {
+                "name": "Extract temperature"
+            },
+            "exhaust_temperature": {
+                "name": "Exhaust temperature"
+            }
+        },
+        "select": {
+            "main_mode": {
+                "name": "Main mode",
+                "state": {
+                    "0": "Off",
+                    "3": "Mode 1",
+                    "4": "Mode 2",
+                    "5": "Mode 3",
+                    "6": "Pause",
+                    "7": "Mode 4",
+                    "Off": "Off",
+                    "Mode 1": "Mode 1",
+                    "Mode 2": "Mode 2",
+                    "Mode 3": "Mode 3",
+                    "Pause": "Pause",
+                    "Mode 4": "Mode 4"
+                }
+            },
+            "temp_mode": {
+                "name": "Temporary mode",
+                "state": {
+                    "0": "Off",
+                    "1": "Exit",
+                    "2": "Party",
+                    "4": "Ventilation",
+                    "Off": "Off",
+                    "Exit": "Exit",
+                    "Party": "Party",
+                    "Ventilation": "Ventilation"
+                }
+            }
+        }
     }
 }
