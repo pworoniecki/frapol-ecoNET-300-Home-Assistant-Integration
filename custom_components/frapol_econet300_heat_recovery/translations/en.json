@@ -55,12 +55,12 @@
                     "5": "Mode 3",
                     "6": "Pause",
                     "7": "Mode 4",
-                    "Off": "Off",
-                    "Mode 1": "Mode 1",
-                    "Mode 2": "Mode 2",
-                    "Mode 3": "Mode 3",
-                    "Pause": "Pause",
-                    "Mode 4": "Mode 4"
+                    "off": "Off",
+                    "mode 1": "Mode 1",
+                    "mode 2": "Mode 2",
+                    "mode 3": "Mode 3",
+                    "pause": "Pause",
+                    "mode 4": "Mode 4"
                 }
             },
             "temp_mode": {
@@ -70,10 +70,10 @@
                     "1": "Exit",
                     "2": "Party",
                     "4": "Ventilation",
-                    "Off": "Off",
-                    "Exit": "Exit",
-                    "Party": "Party",
-                    "Ventilation": "Ventilation"
+                    "off": "Off",
+                    "exit": "Exit",
+                    "party": "Party",
+                    "ventilation": "Ventilation"
                 }
             }
         }
