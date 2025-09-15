@@ -32,18 +32,18 @@ API_REG_PARAM_CURRENT_EXTRACT_TEMPERATURE: Final = "REKcurExtTemp"
 API_REG_PARAM_CURRENT_EXHAUST_TEMPERATURE: Final = "REKcuExhTemp"
 
 API_REG_PARAM_CURRENT_MAIN_MODE_MAPPING_VALUE_TO_NAME: dict = {
-    0: "Off",
-    3: "Mode 1",
-    4: "Mode 2",
-    5: "Mode 3",
-    6: "Pause",
-    7: "Mode 4",
+    0: "off",
+    3: "mode1",
+    4: "mode2",
+    5: "mode3",
+    6: "pause",
+    7: "mode4",
 }
 API_REG_PARAM_CURRENT_TEMP_MODE_MAPPING_VALUE_TO_NAME: dict = {
-    0: "Off",
-    1: "Exit",
-    2: "Party",
-    4: "Ventilation",
+    0: "off",
+    1: "exit",
+    2: "party",
+    4: "ventilation",
 }
 
 API_PARAM_UNIT_MAPPING: dict = {

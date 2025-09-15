@@ -61,27 +61,17 @@
             "main_mode": {
                 "name": "Tryb główny",
                 "state": {
-                    "0": "Wyłączony",
-                    "3": "Tryb 1",
-                    "4": "Tryb 2",
-                    "5": "Tryb 3",
-                    "6": "Pauza",
-                    "7": "Tryb 4",
                     "off": "Wyłączony",
-                    "mode 1": "Tryb 1",
-                    "mode 2": "Tryb 2",
-                    "mode 3": "Tryb 3",
+                    "mode1": "Tryb 1",
+                    "mode2": "Tryb 2",
+                    "mode3": "Tryb 3",
                     "pause": "Pauza",
-                    "mode 4": "Tryb 4"
+                    "mode4": "Tryb 4"
                 }
             },
             "temp_mode": {
                 "name": "Tryb tymczasowy",
                 "state": {
-                    "0": "Wyłączony",
-                    "1": "Wyjście",
-                    "2": "Party",
-                    "4": "Wentylacja",
                     "off": "Wyłączony",
                     "exit": "Wyjście",
                     "party": "Party",

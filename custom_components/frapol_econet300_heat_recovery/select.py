@@ -35,14 +35,14 @@ SELECTS: list[FrapolEconet300SelectData] = (
         api_param_name=API_REG_PARAM_CURRENT_MAIN_MODE,
         value_to_name_mapping=API_REG_PARAM_CURRENT_MAIN_MODE_MAPPING_VALUE_TO_NAME,
         value_extractor=lambda data: data.get("regParams").get("curr").get(API_REG_PARAM_CURRENT_MAIN_MODE),
-        id_suffix="main-mode"
+        id_suffix="main_mode"
     ),
     FrapolEconet300SelectData(
         name="Temporary mode",
         api_param_name=API_REG_PARAM_CURRENT_TEMPORARY_MODE,
         value_to_name_mapping=API_REG_PARAM_CURRENT_TEMP_MODE_MAPPING_VALUE_TO_NAME,
         value_extractor=lambda data: data.get("regParams").get("curr").get(API_REG_PARAM_CURRENT_TEMPORARY_MODE),
-        id_suffix="temp-mode"
+        id_suffix="temp_mode"
     )
 )
 
